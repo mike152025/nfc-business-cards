@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFC Business Cards Admin Panel</title>
+    <link rel="stylesheet" href="styles/admin.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo-section">
+                <div class="logo-icon">💳</div>
+                <h2>Card Studio</h2>
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active" data-section="dashboard">
+                    <span class="icon">📊</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="nav-item" data-section="create-card">
+                    <span class="icon">✨</span>
+                    <span>Create Card</span>
+                </a>
+                <a href="#" class="nav-item" data-section="my-cards">
+                    <span class="icon">📚</span>
+                    <span>My Cards</span>
+                </a>
+                <a href="#" class="nav-item" data-section="templates">
+                    <span class="icon">🎨</span>
+                    <span>Templates</span>
+                </a>
+                <a href="#" class="nav-item" data-section="settings">
+                    <span class="icon">⚙️</span>
+                    <span>Settings</span>
+                </a>
+            </nav>
+            <div class="user-profile">
+                <div class="avatar">👤</div>
+                <div class="user-info">
+                    <p class="user-name">Admin User</p>
+                    <p class="user-status">Premium</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search cards..." id="searchInput">
+                    <span class="search-icon">🔍</span>
+                </div>
+                <div class="header-actions">
+                    <button class="notification-btn">🔔</button>
+                    <button class="help-btn">❓</button>
+                </div>
+            </header>
+
+            <!-- Content Sections -->
+            <div class="content-sections">
+                <!-- Dashboard Section -->
+                <section id="dashboard" class="content-section active">
+                    <div class="section-header">
+                        <h1>Dashboard</h1>
+                        <p>Welcome back! Here's your card overview</p>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">📱</div>
+                            <div class="stat-content">
+                                <h3>Total Cards</h3>
+                                <p class="stat-number" id="totalCards">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">👁️</div>
+                            <div class="stat-content">
+                                <h3>Total Views</h3>
+                                <p class="stat-number" id="totalViews">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">🔗</div>
+                            <div class="stat-content">
+                                <h3>QR Scans</h3>
+                                <p class="stat-number">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">⭐</div>
+                            <div class="stat-content">
+                                <h3>Favorites</h3>
+                                <p class="stat-number">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="recent-cards">
+                        <h2>Recent Cards</h2>
+                        <div id="recentCardsList" class="cards-list"></div>
+                    </div>
+                </section>
+
+                <!-- Create Card Section -->
+                <section id="create-card" class="content-section">
+                    <div class="section-header">
+                        <h1>Create New Business Card</h1>
+                        <p>Design your perfect business card</p>
+                    </div>
+                    
+                    <div class="editor-container">
+                        <!-- Left Panel - Settings -->
+                        <div class="editor-left">
+                            <div class="settings-panel">
+                                <!-- Basic Info -->
+                                <div class="settings-group">
+                                    <h3>Basic Information</h3>
+                                    <input type="text" placeholder="Business Name" id="businessName" class="input-field">
+                                    <input type="text" placeholder="Owner Name" id="ownerName" class="input-field">
+                                    <input type="email" placeholder="Email" id="email" class="input-field">
+                                    <input type="tel" placeholder="Phone" id="phone" class="input-field">
+                                    <input type="url" placeholder="Website" id="website" class="input-field">
+                                    <input type="text" placeholder="Address" id="address" class="input-field">
+                                </div>
+
+                                <!-- Design Settings -->
+                                <div class="settings-group">
+                                    <h3>Design Settings</h3>
+                                    <label>Primary Color</label>
+                                    <div class="color-picker">
+                                        <input type="color" id="primaryColor" value="#000000">
+                                        <span id="primaryColorValue">#000000</span>
+                                    </div>
+                                    <label>Secondary Color</label>
+                                    <div class="color-picker">
+                                        <input type="color" id="secondaryColor" value="#FFFFFF">
+                                        <span id="secondaryColorValue">#FFFFFF</span>
+                                    </div>
+                                    <label>Font Family</label>
+                                    <select id="fontFamily" class="select-field">
+                                        <option value="Arial">Arial</option>
+                                        <option value="Georgia">Georgia</option>
+                                        <option value="Times New Roman">Times New Roman</option>
+                                        <option value="Courier New">Courier New</option>
+                                        <option value="Verdana">Verdana</option>
+                                    </select>
+                                </div>
+
+                                <!-- Logo Upload -->
+                                <div class="settings-group">
+                                    <h3>Logo & Background</h3>
+                                    <label class="file-upload-label">
+                                        <input type="file" id="logoUpload" accept="image/*" hidden>
+                                        <span class="upload-btn">📸 Upload Logo</span>
+                                    </label>
+                                    <div id="logoPreview" class="preview-box"></div>
+                                    <label class="file-upload-label">
+                                        <input type="file" id="backgroundUpload" accept="image/*" hidden>
+                                        <span class="upload-btn">🖼️ Upload Background</span>
+                                    </label>
+                                    <div id="backgroundPreview" class="preview-box"></div>
+                                </div>
+
+                                <!-- QR Code Settings -->
+                                <div class="settings-group">
+                                    <h3>QR Code</h3>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="qrEnabled" checked>
+                                        Enable QR Code
+                                    </label>
+                                    <label>QR Code Label</label>
+                                    <input type="text" id="qrLabel" placeholder="Scan Me" class="input-field">
+                                    <label>QR Code Size (px)</label>
+                                    <input type="number" id="qrSize" value="100" min="50" max="300" class="input-field">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Center Panel - Card Preview & Editor -->
+                        <div class="editor-center">
+                            <!-- Tab Selector -->
+                            <div class="card-tabs">
+                                <button class="tab-btn active" data-tab="front">Front</button>
+                                <button class="tab-btn" data-tab="back">Back</button>
+                            </div>
+
+                            <!-- Card Preview Canvas -->
+                            <div class="card-preview-container">
+                                <div class="card-editor" id="cardEditor">
+                                    <div class="card-canvas front-card" id="frontCard">
+                                        <div class="canvas-elements" id="frontElements"></div>
+                                    </div>
+                                    <div class="card-canvas back-card" id="backCard" style="display: none;">
+                                        <div class="canvas-elements" id="backElements"></div>
+                                    </div>
+                                </div>
+                                <div class="card-info">
+                                    <p>3.5" × 2" • 300 DPI</p>
+                                    <p>Drag elements to reposition • Resize corners</p>
+                                </div>
+                            </div>
+
+                            <!-- Element Tools -->
+                            <div class="element-tools">
+                                <button class="tool-btn" id="addTextBtn">+ Text</button>
+                                <button class="tool-btn" id="addQRBtn">+ QR Code</button>
+                                <button class="tool-btn" id="deleteElementBtn">🗑️ Delete</button>
+                                <button class="tool-btn" id="duplicateElementBtn">📋 Duplicate</button>
+                            </div>
+                        </div>
+
+                        <!-- Right Panel - Element Properties -->
+                        <div class="editor-right">
+                            <div class="properties-panel">
+                                <h3>Element Properties</h3>
+                                <div id="elementProperties" class="properties-empty">
+                                    <p>Click an element to edit</p>
+                                </div>
+                            </div>
+                            <button class="save-btn" id="saveCardBtn">💾 Save Card</button>
+                            <button class="preview-btn" id="previewCardBtn">👁️ Preview</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- My Cards Section -->
+                <section id="my-cards" class="content-section">
+                    <div class="section-header">
+                        <h1>My Cards</h1>
+                        <p>Manage your business cards</p>
+                    </div>
+                    <div id="myCardsList" class="cards-grid"></div>
+                </section>
+
+                <!-- Templates Section -->
+                <section id="templates" class="content-section">
+                    <div class="section-header">
+                        <h1>Templates</h1>
+                        <p>Choose from professionally designed templates</p>
+                    </div>
+                    <div class="templates-grid">
+                        <div class="template-card">
+                            <div class="template-preview" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                <p>Modern Purple</p>
+                            </div>
+                            <button class="use-template-btn">Use Template</button>
+                        </div>
+                        <div class="template-card">
+                            <div class="template-preview" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                <p>Vibrant Pink</p>
+                            </div>
+                            <button class="use-template-btn">Use Template</button>
+                        </div>
+                        <div class="template-card">
+                            <div class="template-preview" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                                <p>Cool Blue</p>
+                            </div>
+                            <button class="use-template-btn">Use Template</button>
+                        </div>
+                        <div class="template-card">
+                            <div class="template-preview" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                                <p>Fresh Green</p>
+                            </div>
+                            <button class="use-template-btn">Use Template</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Settings Section -->
+                <section id="settings" class="content-section">
+                    <div class="section-header">
+                        <h1>Settings</h1>
+                        <p>Manage your account</p>
+                    </div>
+                    <div class="settings-form">
+                        <div class="settings-group">
+                            <h3>Account Settings</h3>
+                            <label>Email Address</label>
+                            <input type="email" class="input-field" value="user@example.com">
+                            <label>Full Name</label>
+                            <input type="text" class="input-field" value="Admin User">
+                            <label>Company</label>
+                            <input type="text" class="input-field" placeholder="Your Company">
+                        </div>
+                        <div class="settings-group">
+                            <h3>Preferences</h3>
+                            <label class="checkbox-label">
+                                <input type="checkbox" checked>
+                                Enable Notifications
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" checked>
+                                Email Updates
+                            </label>
+                        </div>
+                        <button class="save-btn">Save Settings</button>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>

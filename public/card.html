@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Card</title>
+    <link rel="stylesheet" href="styles/card.css">
+</head>
+<body>
+    <div class="card-display-container">
+        <div class="card-wrapper">
+            <!-- Front Card -->
+            <div class="card-front" id="cardFront">
+                <div class="card-content" id="frontCardContent"></div>
+            </div>
+            
+            <!-- Back Card (flip effect) -->
+            <div class="card-back" id="cardBack">
+                <div class="card-content" id="backCardContent"></div>
+            </div>
+        </div>
+        
+        <!-- Card Controls -->
+        <div class="card-controls">
+            <button id="flipBtn" class="control-btn">🔄 Flip Card</button>
+            <button id="downloadBtn" class="control-btn">📥 Download</button>
+            <button id="shareBtn" class="control-btn">📤 Share</button>
+            <button id="printBtn" class="control-btn">🖨️ Print</button>
+        </div>
+        
+        <!-- Card Info -->
+        <div class="card-info" id="cardInfo"></div>
+    </div>
+    
+    <script src="js/card-display.js"></script>
+</body>
+</html>
